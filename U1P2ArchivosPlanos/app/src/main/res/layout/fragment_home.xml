@@ -4,10 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment">
+    tools:context="ittepic.edu.mx.ui.home.HomeFragment">
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/formulario">
 
-    #Aplicación de tarea del profesor benigno
-    .do();
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tareas"
+        android:hint="Descripción de la tarea"
+        android:layout_marginBottom="15dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tareaID"
+            android:inputType="number"
+            android:hint="ID de Tarea"/>
+    </LinearLayout>
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:padding="5dp"
+        android:layout_marginTop="120dp"
+        android:layout_above="@id/layoutbuttons"
+        tools:listitem="@layout/card_layout"
+        app:flow_horizontalBias="0.0" />
+    <LinearLayout
+        android:clipToPadding="true"
+        android:padding="5dp"
+        android:id="@+id/layoutbuttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Añadir"
+            android:id="@+id/btnInsertar"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Borrar"
+            android:id="@+id/btnBorrar"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
 </RelativeLayout>
