@@ -41,7 +41,7 @@ class HomeFragment : Fragment(), CustomAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
 
     ): View {
-
+        leerArchivo()
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -59,7 +59,6 @@ class HomeFragment : Fragment(), CustomAdapter.OnItemClickListener {
             val idtarea = binding.tareaID.text.toString()
             var indice = 0
             indice = lista.size
-         //  var indicemostrado = lista.size+1
             val nuevoitem = Items(
                 R.drawable.todoicono, "Tarea: $indice",  tareas, idtarea
             )
@@ -127,16 +126,28 @@ class HomeFragment : Fragment(), CustomAdapter.OnItemClickListener {
 
     private fun leerArchivo(){
         try{
-            val archivo = BufferedReader(InputStreamReader(requireContext().openFileInput("archivo.txt")))
-            var cadena = ""
+            val archivo2 = BufferedReader(InputStreamReader(requireActivity().openFileInput("archivo.txt")))
+            var br= BufferedReader(archivo2)
+            var linea = br.readLine()
+            val cadena = StringBuilder()
+            val indice = lista.size
 
-            archivo.forEachLine {
-                cadena+= archivo.readLine()
+            while (linea != null) {
+                cadena.append(linea + "\n")
+                linea = br.readLine()
+                val nuevoitem = Items(
+                    R.drawable.todoicono, "Tarea: $indice",  cadena.toString(),linea
+                )
+                lista.add(nuevoitem)
             }
 
-            archivo.close()
-
             AlertDialog.Builder(requireContext()).setMessage(cadena).show()
+            br.close()
+            archivo2.close()
+
+
+
+
         }catch (e:Exception){
             AlertDialog.Builder(requireContext()).setMessage(e.message).show()
 
